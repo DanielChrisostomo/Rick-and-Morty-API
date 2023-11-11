@@ -1,0 +1,12 @@
+.container {
+  margin: 0 auto;
+  background: url('../../img/background.png') no-repeat center center;
+  background-size: cover;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+

@@ -1,0 +1,39 @@
+.container {
+  height: 80vh;
+  padding-top: 3.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: start;
+  color: white;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.container h1 {
+  margin-top: 1rem;
+}
+
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.img img {
+  border-radius: 50%;
+}
+
+.info {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} 
+
+
