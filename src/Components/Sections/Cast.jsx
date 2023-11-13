@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Cast.module.css';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Morty } from '../../../img/morty.svg';
 
 const Cast = () => {
   const [data, setData] = React.useState([]);
@@ -15,12 +16,11 @@ const Cast = () => {
       const json = await response.json();
       if (data === null) setData(json.results);
       else setData([...data, ...json.results]);
-      console.log(url);
     }
     request();
   }, [apiState]);
 
-  function handleSubmit(event) {
+  function searchInput(event) {
     setSearch(event.target.value);
     fetch(url)
       .then((res) => res.json())
@@ -34,7 +34,6 @@ const Cast = () => {
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.info.pages);
         if (apiState >= json.info.pages) {
           return null;
         } else {
@@ -43,15 +42,42 @@ const Cast = () => {
       });
   }
 
-  if (!data) return null;
+  if (!data)
+    return (
+      <div className={styles.noSearch}>
+        <input
+          type="text"
+          name="search"
+          value={search}
+          onChange={searchInput}
+          placeholder="Search your favorite character"
+          className="inputSearch"
+        />
+        <p>
+          There are no results that match your search. <br /> The character that
+          you are looking for could be tripping around the galaxy or it doesn't
+          exist.
+        </p>
+        <button className="btn" onClick={() => window.location.reload()}>
+          BACK
+        </button>
+        <Morty className={styles.morty} />
+      </div>
+    );
   return (
     <>
       <main>
         <h1 className={styles.title}>Rick & Morty Characters</h1>
 
-        <div className={styles.form}>
-          <input type="text" value={search} onChange={handleSubmit} />
-          <button>search</button>
+        <div className={styles.search}>
+          <input
+            type="text"
+            name="search"
+            value={search}
+            onChange={searchInput}
+            placeholder="Search your favorite character"
+            className="inputSearch"
+          />
         </div>
 
         <section className={styles.section}>
