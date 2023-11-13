@@ -13,29 +13,34 @@ const Cast = () => {
     async function request() {
       const response = await fetch(url);
       const json = await response.json();
-      if (!data.length) setData(json.results);
+      if (data === null) setData(json.results);
       else setData([...data, ...json.results]);
+      console.log(url);
     }
     request();
   }, [apiState]);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const response = await fetch(url);
-    const json = await response.json();
-    console.log(event);
-    setData(json.results);
-    setSearch(search);
-    console.log(json);
+  function handleSubmit(event) {
+    setSearch(event.target.value);
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json.results);
+        setApiState(1);
+      });
   }
 
   function handleNext() {
-    if (apiState >= 42) {
-      return null;
-    } else {
-      setApiState(apiState + 1);
-      console.log(url);
-    }
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.info.pages);
+        if (apiState >= json.info.pages) {
+          return null;
+        } else {
+          setApiState(apiState + 1);
+        }
+      });
   }
 
   if (!data) return null;
@@ -44,14 +49,10 @@ const Cast = () => {
       <main>
         <h1 className={styles.title}>Rick & Morty Characters</h1>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <input
-            type="text"
-            value={search}
-            onChange={({ target }) => setSearch(target.value)}
-          />
+        <div className={styles.form}>
+          <input type="text" value={search} onChange={handleSubmit} />
           <button>search</button>
-        </form>
+        </div>
 
         <section className={styles.section}>
           {data.map((dado) => (
