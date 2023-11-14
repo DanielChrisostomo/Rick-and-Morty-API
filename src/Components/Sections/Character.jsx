@@ -27,16 +27,13 @@ const Character = () => {
   }, []);
 
   if (loading) return <div className="loader"></div>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p style={{ color: 'white' }}>{error}</p>;
   if (characters === null) return null;
   return (
     <>
       <div className={`${styles.container} animeLeft`}>
         <div className={styles.img}>
           <img src={characters.image} alt={characters.name} />
-          {/* <Link to="/cast">
-            <button className="btn">BACK</button>
-          </Link> */}
         </div>
         <div>
           <h1>{characters.name}</h1>

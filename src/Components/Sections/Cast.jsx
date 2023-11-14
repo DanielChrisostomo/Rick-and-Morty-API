@@ -51,7 +51,7 @@ const Cast = () => {
       });
   }
 
-  if (error) return <p>{error}</p>;
+  if (error) return <p style={{ color: 'white' }}>{error}</p>;
   if (!data)
     return (
       <div className={styles.noSearch}>
