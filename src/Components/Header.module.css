@@ -5,6 +5,7 @@ header {
   align-content: center;
   height: 10vh;
   width: 100%;
+  padding: 1rem;
 }
 
 .nav {
