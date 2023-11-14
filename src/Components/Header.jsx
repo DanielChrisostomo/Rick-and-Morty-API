@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Morty } from '../../img/morty.svg';
 
 const Header = () => {
   return (
@@ -9,7 +10,7 @@ const Header = () => {
         <div className={styles.nav}>
           <p>Rick</p>
           <Link to="/">
-            <img src="../../img/morty.svg" alt="" />
+            <Morty style={{ maxHeight: '40px', maxWidth: '40px' }} />
           </Link>
           <p>Morty</p>
         </div>
