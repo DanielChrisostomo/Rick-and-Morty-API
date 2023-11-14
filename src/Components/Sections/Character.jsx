@@ -34,9 +34,9 @@ const Character = () => {
       <div className={`${styles.container} animeLeft`}>
         <div className={styles.img}>
           <img src={characters.image} alt={characters.name} />
-          <Link to="/cast">
+          {/* <Link to="/cast">
             <button className="btn">BACK</button>
-          </Link>
+          </Link> */}
         </div>
         <div>
           <h1>{characters.name}</h1>
@@ -50,6 +50,11 @@ const Character = () => {
             <div className={styles.rick}></div>
           </div>
         </div>
+      </div>
+      <div className={styles.botao}>
+        <Link to="/cast">
+          <button className={'btn'}>BACK</button>
+        </Link>{' '}
       </div>
     </>
   );
