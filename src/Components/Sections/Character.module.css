@@ -27,6 +27,11 @@
 
 .img img {
   border-radius: 50%;
+  transition: 400ms;
+}
+
+.img img:hover {
+  transform: scale(1.1);
 }
 
 .info {

@@ -6,29 +6,40 @@ const Character = () => {
   const { id } = useParams();
 
   const [characters, setCharacters] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const url = `https://rickandmortyapi.com/api/character/${id}`;
 
   React.useEffect(() => {
     async function request() {
-      const response = await fetch(url);
-      const json = await response.json();
-      setCharacters(json);
-      console.log(json);
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const json = await response.json();
+        setCharacters(json);
+        console.log(json);
+      } catch (err) {
+        setError('An error has occurred');
+      } finally {
+        setLoading(false);
+      }
     }
     request();
   }, []);
 
+  if (loading) return <div className="loader"></div>;
+  if (error) return <p>{error}</p>;
   if (characters === null) return null;
   return (
     <>
-      <div className={styles.container}>
+      <div className={`${styles.container} animeLeft`}>
         <div className={styles.img}>
           <img src={characters.image} alt={characters.name} />
           <Link to="/cast">
             <button className="btn">BACK</button>
           </Link>
         </div>
-        <div className="animeLeft">
+        <div>
           <h1>{characters.name}</h1>
           <div className={styles.info}>
             <p>Status: {characters.status}</p>

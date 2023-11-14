@@ -7,15 +7,24 @@ const Cast = () => {
   const [data, setData] = React.useState([]);
   const [apiState, setApiState] = React.useState(1);
   const [search, setSearch] = React.useState('');
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   let url = `https://rickandmortyapi.com/api/character/?page=${apiState}&name=${search}`;
 
   React.useEffect(() => {
     async function request() {
-      const response = await fetch(url);
-      const json = await response.json();
-      if (data === null) setData(json.results);
-      else setData([...data, ...json.results]);
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const json = await response.json();
+        if (data === null) setData(json.results);
+        else setData([...data, ...json.results]);
+      } catch (err) {
+        setError('An error has occurred');
+      } finally {
+        setLoading(false);
+      }
     }
     request();
   }, [apiState]);
@@ -42,6 +51,7 @@ const Cast = () => {
       });
   }
 
+  if (error) return <p>{error}</p>;
   if (!data)
     return (
       <div className={styles.noSearch}>
@@ -64,11 +74,11 @@ const Cast = () => {
         <Morty className={styles.morty} />
       </div>
     );
+
   return (
     <>
       <main>
         <h1 className={styles.title}>Rick & Morty Characters</h1>
-
         <div className={styles.search}>
           <input
             type="text"
@@ -80,7 +90,7 @@ const Cast = () => {
           />
         </div>
 
-        <section className={styles.section}>
+        <section className={`${styles.section} animeLeft`}>
           {data.map((dado) => (
             <Link key={dado.id} to={`character/${dado.id}`}>
               <div className={styles.container}>
@@ -114,6 +124,7 @@ const Cast = () => {
             MORE
           </button>
         </div>
+        {loading && <div className={'loader'}></div>}
       </main>
     </>
   );
