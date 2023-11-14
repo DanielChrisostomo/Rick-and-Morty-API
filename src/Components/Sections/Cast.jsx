@@ -63,11 +63,7 @@ const Cast = () => {
           placeholder="Search your favorite character"
           className="inputSearch"
         />
-        <p>
-          There are no results that match your search. <br /> The character that
-          you are looking for could be tripping around the galaxy or it doesn't
-          exist.
-        </p>
+        <p>There are no results that match your search.</p>
         <button className="btn" onClick={() => window.location.reload()}>
           BACK
         </button>

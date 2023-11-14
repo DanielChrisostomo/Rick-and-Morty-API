@@ -5,6 +5,8 @@ footer {
   align-content: center;
   height: 10vh;
   width: 100%;
+  position: absolute;
+  bottom: 0px;
 }
 
 .nav {

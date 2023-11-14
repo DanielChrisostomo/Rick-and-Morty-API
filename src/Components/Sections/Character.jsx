@@ -17,7 +17,6 @@ const Character = () => {
         const response = await fetch(url);
         const json = await response.json();
         setCharacters(json);
-        console.log(json);
       } catch (err) {
         setError('An error has occurred');
       } finally {
@@ -46,6 +45,7 @@ const Character = () => {
             <p>Specie: {characters.species}</p>
             <p>Gender: {characters.gender}</p>
             <p>Origin: {characters.origin.name}</p>
+            {characters.type === '' ? null : <p>Type: {characters.type}</p>}
             <p>Last known location: {characters.location.name}</p>
             <div className={styles.rick}></div>
           </div>
