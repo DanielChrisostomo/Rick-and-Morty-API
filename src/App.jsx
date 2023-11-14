@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -10,7 +10,7 @@ import Cast from './Components/Sections/Cast';
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/cast/character/:id" element={<Character />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
