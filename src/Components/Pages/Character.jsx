@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom';
-import styles from './Character.module.css';
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import styles from "./Character.module.css";
 
 const Character = () => {
   const { id } = useParams();
@@ -18,16 +18,16 @@ const Character = () => {
         const json = await response.json();
         setCharacters(json);
       } catch (err) {
-        setError('An error has occurred');
+        setError("An error has occurred");
       } finally {
         setLoading(false);
       }
     }
     request();
-  }, []);
+  }, [url]);
 
   if (loading) return <div className="loader"></div>;
-  if (error) return <p style={{ color: 'white' }}>{error}</p>;
+  if (error) return <p style={{ color: "white" }}>{error}</p>;
   if (characters === null) return null;
   return (
     <>
@@ -42,7 +42,7 @@ const Character = () => {
             <p>Specie: {characters.species}</p>
             <p>Gender: {characters.gender}</p>
             <p>Origin: {characters.origin.name}</p>
-            {characters.type === '' ? null : <p>Type: {characters.type}</p>}
+            {characters.type === "" ? null : <p>Type: {characters.type}</p>}
             <p>Last known location: {characters.location.name}</p>
             <div className={styles.rick}></div>
           </div>
@@ -50,8 +50,8 @@ const Character = () => {
       </div>
       <div className={styles.botao}>
         <Link to="/cast">
-          <button className={'btn'}>BACK</button>
-        </Link>{' '}
+          <button className={"btn"}>BACK</button>
+        </Link>{" "}
       </div>
     </>
   );

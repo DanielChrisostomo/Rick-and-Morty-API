@@ -1,11 +1,11 @@
-import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Home from './Components/Home';
-import Character from './Components/Sections/Character';
-import Cast from './Components/Sections/Cast';
+import React from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import Home from "./Components/Home";
+import Character from "./Components/Pages/Character";
+import Cast from "./Components/Pages/Cast";
 
 const App = () => {
   return (
