@@ -2,14 +2,35 @@ import React from "react";
 import styles from "./Cast.module.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as Morty } from "../../../img/morty.svg";
-import { useFetch } from "../../Hooks/useFetch";
 
 const Cast = () => {
+  const [data, setData] = React.useState([]);
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const [apiState, setApiState] = React.useState(1);
   const [search, setSearch] = React.useState("");
+  const [pagination, setPagination] = React.useState(null);
 
   const url = `https://rickandmortyapi.com/api/character/?page=${apiState}&name=${search}`;
-  const { data, setData, loading, error, pagination } = useFetch(url);
+
+  React.useEffect(() => {
+    async function request() {
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const json = await response.json();
+        if (!response.ok) throw new Error("Error trying fetch data");
+        setPagination(json.info.pages);
+        if (data === null) setData(json.results);
+        else setData([...data, ...json.results]);
+      } catch (err) {
+        setError("An error has occurred");
+      } finally {
+        setLoading(false);
+      }
+    }
+    request();
+  }, [apiState]);
 
   function searchInput(event) {
     setSearch(event.target.value);
@@ -17,6 +38,7 @@ const Cast = () => {
       .then((res) => res.json())
       .then((json) => {
         setData(json.results);
+        setPagination(json.info.pages);
         setApiState(1);
       });
   }
