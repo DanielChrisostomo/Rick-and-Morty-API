@@ -4,8 +4,8 @@ import "./App.css";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Home from "./Components/Home";
-import Character from "./Components/Pages/Character";
-import Cast from "./Components/Pages/Cast";
+import Character from "./Pages/Character";
+import Cast from "./Pages/Cast";
 
 const App = () => {
   return (
